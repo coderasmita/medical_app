@@ -5,10 +5,12 @@ class CustomTextField extends StatelessWidget {
     super.key,
     required this.hintText,
     this.icon,
+    this.textController,
   });
 
   final String hintText;
   final Widget? icon;
+  final CustomTextField? textController;
 
   @override
   Widget build(BuildContext context) {
