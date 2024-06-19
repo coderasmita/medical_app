@@ -4,21 +4,28 @@ class CustomTextField extends StatelessWidget {
   const CustomTextField({
     super.key,
     required this.hintText,
-    this.icon,
-    this.textController,
+    this.prefixicon,
+    this.suffixIcon,
+    this.obscureText = false,
+    this.textEditingController,
   });
 
   final String hintText;
-  final Widget? icon;
-  final CustomTextField? textController;
+  final Widget? prefixicon;
+  final Widget? suffixIcon;
+  final bool obscureText;
+  final TextEditingController? textEditingController;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: textEditingController,
+      obscureText: obscureText,
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.white,
-        suffixIcon: icon,
+        prefixIcon: prefixicon,
+        suffixIcon: suffixIcon,
         border: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.black),
           borderRadius: BorderRadius.all(

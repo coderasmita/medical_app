@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:medical_app/consts/app_fonts.dart';
+import 'package:medical_app/consts/consts.dart';
 import 'package:medical_app/consts/images.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../components/primary_button.dart';
 import '../../components/custom_text_field.dart';
+import '../../consts/colors.dart';
 import '../../consts/strings.dart';
 
 class LoginView extends StatefulWidget {
@@ -14,57 +17,80 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
+  bool isVisibility = true;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          children: [
-            Image.asset(
-              AppAssets.logo,
-              height: 200,
-            ),
-            10.heightBox,
-            AppStrings.welcomeBack.text.make(),
-            Expanded(
-              // flex: 2,
-              child: Column(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        AppAssets.logo,
+                        height: 200,
+                      ),
+                      10.heightBox,
+                      AppStyles.bold(
+                          title: AppStrings.welcomeBack,
+                          size: AppSizes.size20,
+                          color: AppColors.textColor),
+                      AppStyles.bold(title: AppStrings.weAreExcited),
+                      70.heightBox,
+                      CustomTextField(
+                        hintText: AppStrings.email,
+                        prefixicon: const Icon(Icons.email),
+                        textEditingController: _emailController,
+                      ),
+                      10.heightBox,
+                      // Password
+                      CustomTextField(
+                        obscureText: isVisibility,
+                        hintText: AppStrings.password,
+                        prefixicon: const Icon(Icons.lock),
+                        textEditingController: _passwordController,
+                        suffixIcon: InkWell(
+                            onTap: () {
+                              setState(() {
+                                isVisibility = !isVisibility;
+                              });
+                            },
+                            child: Icon(isVisibility
+                                ? Icons.visibility
+                                : Icons.visibility_off)),
+                      ),
+                      20.heightBox,
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: AppStrings.forgotPassword.text.make(),
+                      ),
+                      20.heightBox,
+                      PrimaryButton(
+                        title: AppStrings.login,
+                        onPressed: () {},
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const CustomTextField(
-                    hintText: AppStrings.email,
-                    icon: Icon(Icons.email),
-                  ),
-                  10.heightBox,
-                  const CustomTextField(
-                    hintText: AppStrings.password,
-                    icon: Icon(Icons.lock),
-                  ),
-                  20.heightBox,
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: AppStrings.forgotPassword.text.make(),
-                  ),
-                  20.heightBox,
-                  PrimaryButton(
-                    title: AppStrings.login,
-                    onPressed: () {},
-                    color: Colors.white,
-                  ),
-                  20.heightBox,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      AppStrings.dontHaveAccount.text.make(),
-                      8.widthBox,
-                      AppStrings.signUp.text.make(),
-                    ],
-                  )
+                  AppStrings.dontHaveAccount.text.make(),
+                  8.widthBox,
+                  AppStrings.signUp.text.make(),
                 ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
