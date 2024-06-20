@@ -25,20 +25,27 @@ class AppStyles {
   static normal({
     String? title,
     Color? color = AppColors.textColor,
-    double? size,
+    double? size = 14,
+    TextAlign alignment = TextAlign.center,
   }) {
-    return title!.text.size(14).color(AppColors.textColor).make();
+    return title!.text
+        .size(14)
+        .color(AppColors.textColor)
+        .align(alignment)
+        .make();
   }
 
   static bold({
     String? title,
     Color? color = AppColors.textColor,
-    double? size,
+    double? size = 14,
+    TextAlign alignment = TextAlign.center,
   }) {
     return title!.text
-        .size(14)
-        .color(AppColors.textColor)
+        .size(size)
+        .color(color)
         .fontFamily(AppFonts.nunitoBold)
+        .align(alignment)
         .make();
   }
 }
