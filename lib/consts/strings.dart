@@ -14,6 +14,7 @@ class AppStrings {
       fullname = "Full Name",
       fullnameHint = "Enter your full name",
       login = "Login",
+      search = "Search doctors",
       welcome = "Welcome",
       alreadyHaveAccount = "Already have an account?",
       dontHaveAccount = "Don't have an account?",

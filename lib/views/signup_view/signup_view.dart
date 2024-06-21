@@ -19,8 +19,11 @@ class SignupView extends StatefulWidget {
 
 class _SignupViewState extends State<SignupView> {
   bool isVisibility = true;
+  bool isConfirmVisibility = true;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,6 +51,7 @@ class _SignupViewState extends State<SignupView> {
                       const CustomTextField(hintText: AppStrings.fullname),
                       10.heightBox,
                       CustomTextField(
+                        textInputType: TextInputType.emailAddress,
                         hintText: AppStrings.email,
                         // prefixicon: const Icon(Icons.email),
                         textEditingController: _emailController,
@@ -72,23 +76,26 @@ class _SignupViewState extends State<SignupView> {
                       10.heightBox,
                       //confirm password
                       CustomTextField(
-                        obscureText: isVisibility,
+                        obscureText: isConfirmVisibility,
                         hintText: AppStrings.confirmPassword,
                         // prefixicon: const Icon(Icons.lock),
-                        textEditingController: _passwordController,
+                        textEditingController: _confirmPasswordController,
                         suffixIcon: InkWell(
                             onTap: () {
                               setState(() {
-                                isVisibility = !isVisibility;
+                                isConfirmVisibility = !isConfirmVisibility;
                               });
                             },
-                            child: Icon(isVisibility
+                            child: Icon(isConfirmVisibility
                                 ? Icons.visibility
                                 : Icons.visibility_off)),
                       ),
 
                       10.heightBox,
-                      const CustomTextField(hintText: AppStrings.phoneNumber),
+                      const CustomTextField(
+                        hintText: AppStrings.phoneNumber,
+                        textInputType: TextInputType.phone,
+                      ),
                       20.heightBox,
 
                       PrimaryButton(

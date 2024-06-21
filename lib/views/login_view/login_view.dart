@@ -47,6 +47,7 @@ class _LoginViewState extends State<LoginView> {
                       AppStyles.bold(title: AppStrings.weAreExcited),
                       70.heightBox,
                       CustomTextField(
+                        textInputType: TextInputType.emailAddress,
                         hintText: AppStrings.email,
                         prefixicon: const Icon(Icons.email),
                         textEditingController: _emailController,
@@ -77,7 +78,8 @@ class _LoginViewState extends State<LoginView> {
                       PrimaryButton(
                         title: AppStrings.login,
                         onPressed: () {
-                          Get.to(() => const HomeView());
+                          Get.to(() => const HomeView(),
+                              transition: Transition.zoom);
                         },
                         color: Colors.white,
                       ),
