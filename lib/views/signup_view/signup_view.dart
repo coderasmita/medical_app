@@ -1,14 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:medical_app/consts/app_fonts.dart';
 import 'package:medical_app/consts/consts.dart';
-import 'package:medical_app/consts/images.dart';
 import 'package:medical_app/views/login_view/login_view.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../components/primary_button.dart';
 import '../../components/custom_text_field.dart';
 import '../../consts/colors.dart';
-import '../../consts/strings.dart';
 
 class SignupView extends StatefulWidget {
   const SignupView({super.key});
