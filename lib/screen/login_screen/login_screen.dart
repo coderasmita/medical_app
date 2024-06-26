@@ -1,25 +1,24 @@
 import 'package:medical_app/consts/consts.dart';
-import 'package:medical_app/views/login_view/login_view.dart';
+import 'package:medical_app/screen/home_screen/home_screen.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../components/primary_button.dart';
 import '../../components/custom_text_field.dart';
 import '../../consts/colors.dart';
+import '../home_screen/home.dart';
+import '../signup_screen/signup_screen.dart';
 
-class SignupView extends StatefulWidget {
-  const SignupView({super.key});
+class LoginView extends StatefulWidget {
+  const LoginView({super.key});
 
   @override
-  State<SignupView> createState() => _SignupViewState();
+  State<LoginView> createState() => _LoginViewState();
 }
 
-class _SignupViewState extends State<SignupView> {
+class _LoginViewState extends State<LoginView> {
   bool isVisibility = true;
-  bool isConfirmVisibility = true;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,22 +33,20 @@ class _SignupViewState extends State<SignupView> {
                   child: Column(
                     children: [
                       Image.asset(
-                        AppAssets.sinup,
+                        AppAssets.logo,
+                        height: 200,
                       ),
                       10.heightBox,
-
                       AppStyles.bold(
-                          title: AppStrings.signupNow,
-                          size: AppSizes.size18,
-                          alignment: TextAlign.center),
+                          title: AppStrings.welcomeBack,
+                          size: AppSizes.size20,
+                          color: AppColors.textColor),
+                      AppStyles.bold(title: AppStrings.weAreExcited),
                       70.heightBox,
-                      //fullname
-                      const CustomTextField(hintText: AppStrings.fullname),
-                      10.heightBox,
                       CustomTextField(
                         textInputType: TextInputType.emailAddress,
                         hintText: AppStrings.email,
-                        // prefixicon: const Icon(Icons.email),
+                        prefixicon: const Icon(Icons.email),
                         textEditingController: _emailController,
                       ),
                       10.heightBox,
@@ -57,7 +54,7 @@ class _SignupViewState extends State<SignupView> {
                       CustomTextField(
                         obscureText: isVisibility,
                         hintText: AppStrings.password,
-                        // prefixicon: const Icon(Icons.lock),
+                        prefixicon: const Icon(Icons.lock),
                         textEditingController: _passwordController,
                         suffixIcon: InkWell(
                             onTap: () {
@@ -69,34 +66,18 @@ class _SignupViewState extends State<SignupView> {
                                 ? Icons.visibility
                                 : Icons.visibility_off)),
                       ),
-                      10.heightBox,
-                      //confirm password
-                      CustomTextField(
-                        obscureText: isConfirmVisibility,
-                        hintText: AppStrings.confirmPassword,
-                        // prefixicon: const Icon(Icons.lock),
-                        textEditingController: _confirmPasswordController,
-                        suffixIcon: InkWell(
-                            onTap: () {
-                              setState(() {
-                                isConfirmVisibility = !isConfirmVisibility;
-                              });
-                            },
-                            child: Icon(isConfirmVisibility
-                                ? Icons.visibility
-                                : Icons.visibility_off)),
-                      ),
-
-                      10.heightBox,
-                      const CustomTextField(
-                        hintText: AppStrings.phoneNumber,
-                        textInputType: TextInputType.phone,
+                      20.heightBox,
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: AppStrings.forgotPassword.text.make(),
                       ),
                       20.heightBox,
-
                       PrimaryButton(
-                        title: AppStrings.signUp,
-                        onPressed: () {},
+                        title: AppStrings.login,
+                        onPressed: () {
+                          Get.to(() => const Home(),
+                              transition: Transition.zoom);
+                        },
                         color: Colors.white,
                       ),
                     ],
@@ -106,13 +87,17 @@ class _SignupViewState extends State<SignupView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  AppStrings.alreadyHaveAccount.text.make(),
+                  InkWell(
+                      onTap: () {
+                        Get.to(() => const SignupView());
+                      },
+                      child: AppStrings.dontHaveAccount.text.make()),
                   8.widthBox,
                   GestureDetector(
                     onTap: () {
-                      Get.to(() => const LoginView());
+                      Get.to(() => const SignupView());
                     },
-                    child: AppStrings.login.text
+                    child: AppStrings.signUp.text
                         .color(AppColors.textColor)
                         .semiBold
                         .make(),

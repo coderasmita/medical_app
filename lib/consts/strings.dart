@@ -20,5 +20,12 @@ class AppStrings {
       dontHaveAccount = "Don't have an account?",
       forgotPassword = "Forgot Password?",
       or = "or",
-      signUp = "Sign Up";
+      signUp = "Sign Up",
+      body = "Body",
+      ear = "Ear",
+      liver = "Liver",
+      lungs = "Lungs",
+      heart = "Heart",
+      kidney = "Kidney",
+      doctor = "Doctor";
 }

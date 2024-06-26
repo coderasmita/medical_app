@@ -1,23 +1,25 @@
 import 'package:medical_app/consts/consts.dart';
-import 'package:medical_app/views/home_view/home_view.dart';
+import 'package:medical_app/screen/login_screen/login_screen.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../components/primary_button.dart';
 import '../../components/custom_text_field.dart';
 import '../../consts/colors.dart';
-import '../signup_view/signup_view.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+class SignupView extends StatefulWidget {
+  const SignupView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<SignupView> createState() => _SignupViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class _SignupViewState extends State<SignupView> {
   bool isVisibility = true;
+  bool isConfirmVisibility = true;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,20 +34,22 @@ class _LoginViewState extends State<LoginView> {
                   child: Column(
                     children: [
                       Image.asset(
-                        AppAssets.logo,
-                        height: 200,
+                        AppAssets.sinup,
                       ),
                       10.heightBox,
+
                       AppStyles.bold(
-                          title: AppStrings.welcomeBack,
-                          size: AppSizes.size20,
-                          color: AppColors.textColor),
-                      AppStyles.bold(title: AppStrings.weAreExcited),
+                          title: AppStrings.signupNow,
+                          size: AppSizes.size18,
+                          alignment: TextAlign.center),
                       70.heightBox,
+                      //fullname
+                      const CustomTextField(hintText: AppStrings.fullname),
+                      10.heightBox,
                       CustomTextField(
                         textInputType: TextInputType.emailAddress,
                         hintText: AppStrings.email,
-                        prefixicon: const Icon(Icons.email),
+                        // prefixicon: const Icon(Icons.email),
                         textEditingController: _emailController,
                       ),
                       10.heightBox,
@@ -53,7 +57,7 @@ class _LoginViewState extends State<LoginView> {
                       CustomTextField(
                         obscureText: isVisibility,
                         hintText: AppStrings.password,
-                        prefixicon: const Icon(Icons.lock),
+                        // prefixicon: const Icon(Icons.lock),
                         textEditingController: _passwordController,
                         suffixIcon: InkWell(
                             onTap: () {
@@ -65,17 +69,35 @@ class _LoginViewState extends State<LoginView> {
                                 ? Icons.visibility
                                 : Icons.visibility_off)),
                       ),
-                      20.heightBox,
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: AppStrings.forgotPassword.text.make(),
+                      10.heightBox,
+                      //confirm password
+                      CustomTextField(
+                        obscureText: isConfirmVisibility,
+                        hintText: AppStrings.confirmPassword,
+                        // prefixicon: const Icon(Icons.lock),
+                        textEditingController: _confirmPasswordController,
+                        suffixIcon: InkWell(
+                            onTap: () {
+                              setState(() {
+                                isConfirmVisibility = !isConfirmVisibility;
+                              });
+                            },
+                            child: Icon(isConfirmVisibility
+                                ? Icons.visibility
+                                : Icons.visibility_off)),
+                      ),
+
+                      10.heightBox,
+                      const CustomTextField(
+                        hintText: AppStrings.phoneNumber,
+                        textInputType: TextInputType.phone,
                       ),
                       20.heightBox,
+
                       PrimaryButton(
-                        title: AppStrings.login,
+                        title: AppStrings.signUp,
                         onPressed: () {
-                          Get.to(() => const HomeView(),
-                              transition: Transition.zoom);
+                          Get.to(() => const LoginView());
                         },
                         color: Colors.white,
                       ),
@@ -86,13 +108,17 @@ class _LoginViewState extends State<LoginView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  AppStrings.dontHaveAccount.text.make(),
+                  InkWell(
+                      onTap: () {
+                        Get.to(() => const LoginView());
+                      },
+                      child: AppStrings.alreadyHaveAccount.text.make()),
                   8.widthBox,
                   GestureDetector(
                     onTap: () {
-                      Get.to(() => const SignupView());
+                      Get.to(() => const LoginView());
                     },
-                    child: AppStrings.signUp.text
+                    child: AppStrings.login.text
                         .color(AppColors.textColor)
                         .semiBold
                         .make(),
